@@ -1,0 +1,2 @@
+# Tercera PreEntrega Valeria Puebla
+Hola! Este proyecto consiste en una pagina web en donde exista un de productos, lugares de compra y ciudades para una web que contenga una BBDD de productos aptos para distintas condiciones alimentarias (celiacos, veganos, etc), de manera que sirva como un buscador de alternativas y en qué lugar puedes conseguirlo.

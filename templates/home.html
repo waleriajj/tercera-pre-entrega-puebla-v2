@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Inicio - Búsqueda</title>
+    <style>
+        body {
+            font-family: 'Calibri', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #e0f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #e0f7fa 0%, #7e57c2 100%);
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-10px);
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #7e57c2;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .search-form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .search-form input[type="text"] {
+            padding: 15px;
+            width: 70%;
+            border: 2px solid #7e57c2;
+            border-radius: 25px;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            outline: none;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .search-form input[type="text"]:focus {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-form button {
+            padding: 15px 25px;
+            border: none;
+            background-color: #26c6da;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-left: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .search-form button:hover {
+            background-color: #00acc1;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .results-section {
+            margin-top: 40px;
+        }
+
+        .results-section h2 {
+            color: #7e57c2;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .result-item {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            animation: fadeIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .no-results {
+            color: #999;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .add-buttons {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .add-buttons a {
+            display: inline-block;
+            padding: 15px 20px;
+            background-color: #26c6da;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-right: 15px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-buttons a:hover {
+            background-color: #00acc1;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenido a la BBDD de productos para condiciones alimentarias especiales</h1>
+
+        <!-- Formulario de búsqueda -->
+        <form class="search-form" method="GET" action="">
+            <input type="text" name="q" placeholder="Buscar producto, ciudad o lugar..." value="{{ query }}">
+            <button type="submit">Buscar</button>
+        </form>
+
+        <!-- Mostrar los resultados de la búsqueda -->
+        <div class="results-section">
+            {% if query %}
+                <h2>Resultados para "{{ query }}":</h2>
+
+                <!-- Resultados de productos -->
+                <h3>Productos:</h3>
+                {% if productos %}
+                    {% for producto in productos %}
+                        <div class="result-item">Producto: {{ producto.nombre_producto }} - Codigo de barras: {{ producto.codigo_producto }} - Categoria: {{ producto.categoria }}</div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-results">No se encontraron productos.</div>
+                {% endif %}
+
+                <!-- Resultados de ciudades -->
+                <h3>Ciudades:</h3>
+                {% if ciudades %}
+                    {% for ciudad in ciudades %}
+                        <div class="result-item">{{ ciudad.ciudad }} - Código postal: {{ ciudad.codigo_postal }}</div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-results">No se encontraron ciudades.</div>
+                {% endif %}
+
+                <!-- Resultados de lugares -->
+                <h3>Lugares:</h3>
+                {% if lugares %}
+                    {% for lugar in lugares %}
+                        <div class="result-item">Nombre comercio: {{ lugar.nombre }} - Direccion: {{ lugar.direccion }} - Comuna: {{ lugar.comuna }}</div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-results">No se encontraron lugares.</div>
+                {% endif %}
+            {% else %}
+                <p>Introduce una palabra para buscar (puede ser para producto, ciudad o lugar).</p>
+            {% endif %}
+        </div>
+
+        <!-- Botones para crear Producto, Ciudad o Lugar -->
+        <div class="add-buttons">
+            <a href="{% url 'crear_producto' %}">Crear Producto</a>
+            <a href="{% url 'crear_ciudad' %}">Crear Ciudad</a>
+            <a href="{% url 'crear_lugar' %}">Crear Lugar</a>
+        </div>
+    </div>
+</body>
+</html>
+

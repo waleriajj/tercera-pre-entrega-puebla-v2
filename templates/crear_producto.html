@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar nuevo producto</title>
+    <style>
+        body {
+            font-family: 'Calibri', sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #e0f7fa 0%, #7e57c2 100%);
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #7e57c2;
+            font-size: 28px;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        form p {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ccc;
+            border-radius: 25px;
+            margin-top: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            border-color: #7e57c2;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background-color: #26c6da;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            transition: background-color 0.3s, box-shadow 0.3s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #00acc1;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .link-container {
+            margin-top: 20px;
+        }
+
+        a {
+            color: #7e57c2;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Agregar producto a listado</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Guardar</button>
+        </form>
+        <div class="link-container">
+            <a href="/">Volver al inicio</a>
+        </div>
+    </div>
+</body>
+</html>
+
